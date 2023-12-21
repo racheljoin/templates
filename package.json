@@ -1,0 +1,40 @@
+{
+  "name": "fe-quick-start-templates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "type": "module",
+  "bin": {
+    "gen": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/racheljoin/templates.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/racheljoin/templates/issues"
+  },
+  "homepage": "https://github.com/racheljoin/templates#readme",
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "prettier": "^3.1.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "kolorist": "^1.8.0",
+    "prompts": "^2.4.2"
+  }
+}
