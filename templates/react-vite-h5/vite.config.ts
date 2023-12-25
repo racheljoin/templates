@@ -1,4 +1,4 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { fileURLToPath, URL } from 'node:url';
 import postcsspxtoviewport from 'postcss-px-to-viewport';
@@ -10,7 +10,7 @@ export default defineConfig({
     react(),
     viteMockServe({
       mockPath: 'mock',
-      // enable: import.meta.env.MODE === '',
+      localEnabled: true,
     }),
   ],
   css: {
