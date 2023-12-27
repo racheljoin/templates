@@ -1,15 +1,10 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+// import fs from 'node:fs';
+// import path from 'node:path';
+// import { fileURLToPath } from 'node:url';
 import prompts from 'prompts';
-import { reset, red } from 'kolorist';
+import { reset, red, gray } from 'kolorist';
+import { getTemplates } from './util.js';
 
-type Framework = {
-  name: string;
-  display: string;
-};
-
-const FRAMEWORKS: Framework[] = [];
 const defaultTargetDir = 'myApp';
 
 function isValidPackageName(projectName: string) {
@@ -18,20 +13,24 @@ function isValidPackageName(projectName: string) {
 
 const init = async () => {
   let result: prompts.Answers<'projectName' | 'packageName' | 'framework'>;
+
+  const FRAMEWORKS = await getTemplates();
+
   try {
     result = await prompts(
       [
         {
           type: 'text',
-          name: 'projectName',
-          message: reset('Project name:'),
+          name: 'packageName',
+          message: reset('Package name:'),
+          validate: (dir) => isValidPackageName(dir) || 'Invalid package.json name',
           initial: defaultTargetDir,
         },
         {
           type: 'text',
-          name: 'packageName',
-          message: reset('Package name:'),
-          validate: (dir) => isValidPackageName(dir) || 'Invalid package.json name',
+          name: 'projectName',
+          message: reset('Project name:'),
+          initial: defaultTargetDir,
         },
         {
           type: 'select',
@@ -40,8 +39,8 @@ const init = async () => {
           initial: 0,
           choices: FRAMEWORKS.map((framework) => {
             return {
-              title: framework.display,
-              value: framework,
+              title: `${framework.templateName}(${gray(framework.desc)})`,
+              value: framework.templateName,
             };
           }),
         },
@@ -57,7 +56,9 @@ const init = async () => {
     return;
   }
 
-  //   const { framework, packageName } = result;
+  console.log(result);
+
+  const { framework, packageName, projectName } = result;
 };
 
 init();

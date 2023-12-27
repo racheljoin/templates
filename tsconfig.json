@@ -1,16 +1,31 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
+    "esModuleInterop": true,
     "target": "es2017",
     "declaration": true,
+    "rootDir": ".",
     "outDir": "./lib",
     "strict": true,
     "lib": ["es6"],
-    "sourceMap": false,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "strictNullChecks": false,
+    "noEmitOnError": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "exclude": ["node_modules", "**/__tests__/*"],
+  "ts-node": {
+      "esm": true
+  }
 }
