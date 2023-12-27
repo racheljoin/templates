@@ -7,16 +7,15 @@ import {
 } from 'react-redux';
 
 /* Instruments */
+import { Middlewares } from 'node_modules/@reduxjs/toolkit/dist/configureStore';
 import { reducer } from './rootReducer';
 import { middleware } from './middleware';
-import { Middlewares } from 'node_modules/@reduxjs/toolkit/dist/configureStore';
 import { CounterSliceState } from '.';
 
 export const reduxStore = configureStore({
   reducer,
-  middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(middleware as Middlewares<{ counter: CounterSliceState }>);
-  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(middleware as Middlewares<{ counter: CounterSliceState }>),
 });
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>();
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector;

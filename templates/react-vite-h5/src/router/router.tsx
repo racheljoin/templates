@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
+import ErrorPage from './errorPage.tsx';
+import { AuthLoader } from './auth.tsx';
 import App from '@/pages/App/index.tsx';
 import Counter from '@/pages/Counter.tsx';
 import Login from '@/pages/Login.tsx';
 import Nav from '@/pages/Nav.tsx';
-import ErrorPage from './errorPage.tsx';
-import { authLoader } from './auth.tsx';
 const router = createBrowserRouter([
   {
     path: '/login',
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'reduxDemo',
-        loader: authLoader,
+        loader: AuthLoader,
         element: <Counter />,
       },
     ],

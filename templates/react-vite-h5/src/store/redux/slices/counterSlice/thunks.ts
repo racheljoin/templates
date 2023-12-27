@@ -1,9 +1,9 @@
 /* Instruments */
-import { createAppAsyncThunk } from '@/store/redux/createAppAsyncThunk';
-import type { ReduxThunkAction } from '@/store/redux';
 import { fetchIdentityCount } from './fetchIdentityCount';
 import { selectCount } from './selectors';
 import { counterSlice } from './counterSlice';
+import type { ReduxThunkAction } from '@/store/redux';
+import { createAppAsyncThunk } from '@/store/redux/createAppAsyncThunk';
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -23,7 +23,6 @@ export const incrementIfOddAsync =
   (amount: number): ReduxThunkAction =>
   (dispatch, getState) => {
     const currentValue = selectCount(getState());
-
     if (currentValue % 2 === 1) {
       dispatch(counterSlice.actions.incrementByAmount(amount));
     }

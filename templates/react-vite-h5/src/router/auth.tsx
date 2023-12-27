@@ -1,13 +1,16 @@
 import { redirect } from 'react-router-dom';
+import { reduxStore } from '@/store/redux';
 
-const isLogin = () => false;
+const isLogin = () => {
+  const { token } = reduxStore.getState().login;
+  return !!token;
+};
 
-export async function authLoader() {
+export async function AuthLoader() {
   if (isLogin()) {
     return {
       isLogin: true,
     };
-  } else {
-    return redirect('/login');
   }
+  return redirect('/login');
 }

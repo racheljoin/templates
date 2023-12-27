@@ -2,7 +2,6 @@ import { useState } from 'react';
 import reactLogo from '@/assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.less';
-import { redirect } from 'react-router-dom';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,7 +21,6 @@ function App() {
         <p>state demo</p>
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
       </div>
-      <button onClick={() => redirect('/login')}>点击登录</button>
     </>
   );
 }
