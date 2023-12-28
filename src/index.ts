@@ -5,7 +5,7 @@ import prompts from 'prompts';
 import { reset, red, gray } from 'kolorist';
 import { getTemplates, createDir, copy, repairPkgConfig, formatTargetDir } from './util.js';
 
-const defaultTargetDir = 'myApp';
+const defaultTargetDir = 'myapp';
 
 // let targetDir = defaultTargetDir;
 

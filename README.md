@@ -3,7 +3,7 @@
 使用手册：
 - 方法1：
 ```
-npx fe-quick-start-template gen
+npx fe-quick-start-template@latest gen
 ```
 - 方法2：
 ```
