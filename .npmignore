@@ -2,3 +2,12 @@ src
 tsconfig.json
 tslint.json
 .prettierrc
+node_modules
+src/templates/*/node_modules
+src/templates/*/dist
+src/templates/*/yarn.lock
+src/templates/*/yarn-debug.log*
+src/templates/*/npm-debug.log*
+src/templates/*/pnpm-debug.log*
+
+

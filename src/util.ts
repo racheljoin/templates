@@ -10,7 +10,6 @@ type Framework = {
 };
 
 export const getTemplates = async (): Promise<Framework[]> => {
-  console.log(import.meta.url, '-------');
   const templateDir = path.resolve(fileURLToPath(import.meta.url), '../../templates');
   const templatesFiles = await fs.readdirSync(templateDir);
   return Promise.all<Framework>(
