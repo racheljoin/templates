@@ -1,6 +1,6 @@
 {
   "name": "fe-quick-start-template",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   ],
   "type": "module",
   "bin": {
+    "create-fe-quick-start-template": "index.js",
     "gen": "index.js"
   },
   "engines": {
