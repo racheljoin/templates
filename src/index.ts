@@ -1,11 +1,13 @@
 // import fs from 'node:fs';
-// import path from 'node:path';
-// import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import prompts from 'prompts';
 import { reset, red, gray } from 'kolorist';
-import { getTemplates } from './util.js';
+import { getTemplates, createDir, copy, repairPkgConfig, formatTargetDir } from './util.js';
 
 const defaultTargetDir = 'myApp';
+
+// let targetDir = defaultTargetDir;
 
 function isValidPackageName(projectName: string) {
   return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(projectName);
@@ -21,15 +23,15 @@ const init = async () => {
       [
         {
           type: 'text',
-          name: 'packageName',
-          message: reset('Package name:'),
-          validate: (dir) => isValidPackageName(dir) || 'Invalid package.json name',
+          name: 'projectName',
+          message: reset('Project name:'),
           initial: defaultTargetDir,
         },
         {
           type: 'text',
-          name: 'projectName',
-          message: reset('Project name:'),
+          name: 'packageName',
+          message: reset('Package name:'),
+          validate: (dir) => isValidPackageName(dir) || 'Invalid package.json name',
           initial: defaultTargetDir,
         },
         {
@@ -56,9 +58,19 @@ const init = async () => {
     return;
   }
 
-  console.log(result);
-
   const { framework, packageName, projectName } = result;
+
+  const cwd = process.cwd();
+  const targetDir = path.join(cwd, formatTargetDir(projectName));
+  await createDir(targetDir);
+
+  const templateDir = path.resolve(fileURLToPath(import.meta.url), '../templates', `${framework}`);
+
+  copy(templateDir, targetDir);
+
+  repairPkgConfig({
+    packageName,
+  });
 };
 
 init();
