@@ -1,6 +1,6 @@
 {
   "name": "fe-quick-start-templates",
-  "version": "1.0.0-beta",
+  "version": "1.0.0-beta8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,11 +11,16 @@
     "dev": "ts-node-esm ./src/index.ts"
   },
   "files": [
-    "lib/**/*"
+    "dist/**/*",
+    "index.js",
+    "templates/react-vite-h5/**/*"
   ],
   "type": "module",
   "bin": {
-    "gen": "./lib/src/index.js"
+    "gen": "index.js"
+  },
+  "engines": {
+    "node": "^18.0.0 || >=20.0.0"
   },
   "repository": {
     "type": "git",

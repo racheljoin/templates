@@ -64,7 +64,7 @@ const init = async () => {
   const targetDir = path.join(cwd, formatTargetDir(projectName));
   await createDir(targetDir);
 
-  const templateDir = path.resolve(fileURLToPath(import.meta.url), '../templates', `${framework}`);
+  const templateDir = path.resolve(fileURLToPath(import.meta.url), '../../templates', `${framework}`);
 
   copy(templateDir, targetDir);
 

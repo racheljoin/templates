@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import readline from 'readline';
 import { red } from 'kolorist';
 
@@ -9,11 +10,13 @@ type Framework = {
 };
 
 export const getTemplates = async (): Promise<Framework[]> => {
-  const templatesFiles = await fs.readdirSync(path.join('templates'));
+  console.log(import.meta.url, '-------');
+  const templateDir = path.resolve(fileURLToPath(import.meta.url), '../../templates');
+  const templatesFiles = await fs.readdirSync(templateDir);
   return Promise.all<Framework>(
     templatesFiles.map((dirName) => {
       return new Promise(async (res) => {
-        const firstLine = await readFileFirstLine(path.join('templates', dirName, 'README.md'));
+        const firstLine = await readFileFirstLine(path.join(templateDir, dirName, 'README.md'));
         res({
           templateName: dirName,
           desc: firstLine,
