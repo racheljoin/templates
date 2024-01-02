@@ -1,9 +1,10 @@
 # React + TS + Vite + RouterV6 + redux/toolkit
 
-模板创建来自 [react-ts](https://vitejs.dev/guide/)
+[模板创建CLI](https://github.com/racheljoin/templates.git)
 ```
-yarn create vite my-vue-app --template react-ts
+npx fe-quick-start-template@latest gen
 ```
+
 
 ### 路由控制
 1. [路由使用文档](https://reactrouter.com/en/6.21.1)
@@ -29,7 +30,8 @@ yarn genTag
 ### 
 
 
-### 以下为原模板信息
+### 基础模板信息 [react-ts](https://vitejs.dev/guide/)
+
 #### ESLint配置扩展
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:

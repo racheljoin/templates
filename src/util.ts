@@ -43,7 +43,7 @@ async function copyDir(srcDir: string, destDir: string) {
   for (const file of fs.readdirSync(srcDir)) {
     const srcFile = path.resolve(srcDir, file);
     const destFile = path.resolve(destDir, file);
-    if (file !== 'package.json') {
+    if (file !== 'package.json' && file !== 'gitignore.txt') {
       await copy(srcFile, destFile);
     }
   }
@@ -55,10 +55,10 @@ export const repairPkgConfig = (src: string, dest: string, { packageName }: { pa
   write(dest, `package.json`, JSON.stringify(pkg, null, 2) + '\n');
 };
 
-const write = (root, file: string, content?: string) => {
+export const write = async (root: string, file: string, content?: string) => {
   const targetPath = path.join(root, file);
   if (content) {
-    fs.writeFileSync(targetPath, content);
+    await fs.writeFileSync(targetPath, content);
   }
 };
 

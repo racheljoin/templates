@@ -1,9 +1,10 @@
 // import fs from 'node:fs';
 import path from 'node:path';
 import fs from 'node:fs';
+import { exec } from 'child_process';
 import { fileURLToPath } from 'node:url';
 import prompts from 'prompts';
-import { reset, red, gray, lightGreen } from 'kolorist';
+import { reset, red, gray, lightGreen, magenta } from 'kolorist';
 import {
   getTemplates,
   createDir,
@@ -13,6 +14,7 @@ import {
   isEmpty,
   emptyDir,
   getPkgManager,
+  write,
 } from './util.js';
 
 const defaultTargetDir = 'myapp';
@@ -22,7 +24,7 @@ function isValidPackageName(projectName: string) {
 }
 
 const init = async () => {
-  let result: prompts.Answers<'projectName' | 'packageName' | 'framework' | 'overwrite'>;
+  let result: prompts.Answers<'projectName' | 'packageName' | 'framework' | 'overwrite' | 'gitInit'>;
 
   const FRAMEWORKS = await getTemplates();
 
@@ -79,6 +81,12 @@ const init = async () => {
             };
           }),
         },
+        {
+          type: 'text',
+          name: 'gitInit',
+          message: '是否初始化git仓库',
+          initial: 'Y',
+        },
       ],
       {
         onCancel: () => {
@@ -91,7 +99,7 @@ const init = async () => {
     return;
   }
 
-  const { framework, packageName, projectName = './', overwrite } = result;
+  const { framework, packageName, projectName = './', overwrite, gitInit = 'Y' } = result;
 
   const targetDir = path.join(cwd, formatTargetDir(projectName));
   if (overwrite === 'yes') {
@@ -102,11 +110,12 @@ const init = async () => {
 
   const templateDir = path.resolve(fileURLToPath(import.meta.url), '../../templates', `${framework}`);
 
-  copy(templateDir, targetDir);
+  await copy(templateDir, targetDir);
 
-  repairPkgConfig(templateDir, targetDir, {
+  await repairPkgConfig(templateDir, targetDir, {
     packageName,
   });
+
   console.log();
 
   if (targetDir !== cwd) {
@@ -114,6 +123,7 @@ const init = async () => {
   }
 
   const pkgManager = getPkgManager();
+  console.log('8888888888');
 
   switch (pkgManager) {
     case 'yarn':
@@ -126,6 +136,15 @@ const init = async () => {
       break;
   }
   console.log();
+
+  if (['Y', 'y'].includes(gitInit)) {
+    exec('git init', {
+      cwd: targetDir,
+    });
+    fs.copyFileSync(`${templateDir}/gitignore.txt`, `${targetDir}/.gitignore`);
+    console.log(magenta(`  添加远程仓库连接，执行：`));
+    console.log(magenta('  git remote add <连接名> <连接地址>'));
+  }
 };
 
 init();
