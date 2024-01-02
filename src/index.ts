@@ -123,7 +123,6 @@ const init = async () => {
   }
 
   const pkgManager = getPkgManager();
-  console.log('8888888888');
 
   switch (pkgManager) {
     case 'yarn':
