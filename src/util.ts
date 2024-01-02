@@ -29,30 +29,53 @@ export const createDir = async (dir: string) => {
   await fs.mkdirSync(dir, { recursive: true });
 };
 
-export const copy = (srcDir: string, dest: string) => {
+export const copy = async (srcDir: string, dest: string) => {
   const stat = fs.statSync(srcDir);
   if (stat.isDirectory()) {
-    copyDir(srcDir, dest);
+    await copyDir(srcDir, dest);
   } else {
-    fs.copyFileSync(srcDir, dest);
+    await fs.copyFileSync(srcDir, dest);
   }
 };
 
-function copyDir(srcDir: string, destDir: string) {
+async function copyDir(srcDir: string, destDir: string) {
   fs.mkdirSync(destDir, { recursive: true });
   for (const file of fs.readdirSync(srcDir)) {
     const srcFile = path.resolve(srcDir, file);
     const destFile = path.resolve(destDir, file);
-    copy(srcFile, destFile);
+    if (file !== 'package.json') {
+      await copy(srcFile, destFile);
+    }
   }
 }
 
-export const repairPkgConfig = ({ packageName }: { packageName: string }) => {
-  console.log(packageName, 'packageName');
+export const repairPkgConfig = (src: string, dest: string, { packageName }: { packageName: string }) => {
+  const pkg = JSON.parse(fs.readFileSync(path.join(src, `package.json`), 'utf-8'));
+  pkg.name = packageName;
+  write(dest, `package.json`, JSON.stringify(pkg, null, 2) + '\n');
+};
+
+const write = (root, file: string, content?: string) => {
+  const targetPath = path.join(root, file);
+  if (content) {
+    fs.writeFileSync(targetPath, content);
+  }
 };
 
 export const formatTargetDir = (targetDir: string | undefined) => {
   return targetDir?.trim().replace(/\/+$/g, '');
+};
+
+export const emptyDir = async (dir: string) => {
+  if (!fs.existsSync(dir)) {
+    return;
+  }
+  for (const file of fs.readdirSync(dir)) {
+    if (file === '.git') {
+      continue;
+    }
+    await fs.rmSync(path.resolve(dir, file), { recursive: true, force: true });
+  }
 };
 
 export const isEmpty = (path: string) => {
@@ -76,3 +99,19 @@ const readFileFirstLine = async (filePath: string): Promise<string> => {
     }
   });
 };
+
+export const getPkgManager = () => {
+  const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent);
+  const pkgManager = pkgInfo ? pkgInfo.name : 'npm';
+  return pkgManager;
+};
+
+function pkgFromUserAgent(userAgent: string | undefined) {
+  if (!userAgent) return undefined;
+  const pkgSpec = userAgent.split(' ')[0];
+  const pkgSpecArr = pkgSpec.split('/');
+  return {
+    name: pkgSpecArr[0],
+    version: pkgSpecArr[1],
+  };
+}
