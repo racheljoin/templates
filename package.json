@@ -1,6 +1,6 @@
 {
   "name": "fe-quick-start-template",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,8 @@
   "files": [
     "dist/**/*",
     "index.js",
-    "templates/react-vite-h5/**/*"
+    "templates/react-vite-h5/**/*",
+    "templates/cra-webpack-h5/**/*"
   ],
   "type": "module",
   "bin": {
