@@ -1,8 +1,6 @@
-import { IUserData } from "@/service/models/load";
+const loginLocalStorageKey = '__loginLocalStorageKey__';
 
-const loginLocalStorageKey = "__loginLocalStorageKey__";
-
-export const setLoginLocalStorage = (persistenceData: IUserData) => {
+export const setLoginLocalStorage = (persistenceData: unknown) => {
   try {
     localStorage.setItem(loginLocalStorageKey, JSON.stringify(persistenceData));
     return true;
@@ -11,7 +9,7 @@ export const setLoginLocalStorage = (persistenceData: IUserData) => {
   }
 };
 
-export const getLoginLocalStorage = (): IUserData | null => {
+export const getLoginLocalStorage = () => {
   const loginData = localStorage.getItem(loginLocalStorageKey);
   if (loginData) {
     try {
@@ -26,7 +24,3 @@ export const getLoginLocalStorage = (): IUserData | null => {
 export const clearLoginLocalStorage = () => {
   localStorage.removeItem(loginLocalStorageKey);
 };
-
-export const isValidPhone = (phone: string) =>
-  /^1[3|4|5|7|8|9][0-9]{9}$/.test(phone);
-

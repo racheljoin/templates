@@ -1,7 +1,5 @@
 'use strict';
 
-const nodeExternals = require('webpack-node-externals');
-const { sentryWebpackPlugin } = require("@sentry/webpack-plugin");
 const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const fs = require('fs');

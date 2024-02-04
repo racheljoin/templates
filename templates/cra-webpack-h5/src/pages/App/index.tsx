@@ -1,15 +1,27 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import reactLogo from "@/assets/react.svg";
+import "./App.less";
 
 function App() {
-  const navigate = useNavigate();
-  const handleStart = () => {
-    navigate('/startCheck');
-  };
-  const handleGotoRecord = () => {
-    navigate('/reportRecord');
-  };
+  const [count, setCount] = useState(0);
 
-  return <div className="linerBackgroundWithPerson  px-3 pb-20">欢迎</div>;
+  return (
+    <>
+      <div>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <p>state demo</p>
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+      </div>
+    </>
+  );
 }
 
 export default App;
+

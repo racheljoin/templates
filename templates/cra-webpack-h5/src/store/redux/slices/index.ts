@@ -1,1 +1,3 @@
-export * from './counterSlice';
+export * from "./counterSlice";
+export * from "./loginSlice";
+

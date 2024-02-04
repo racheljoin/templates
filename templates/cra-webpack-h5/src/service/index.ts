@@ -4,14 +4,14 @@ import { AxiosResponse } from "axios";
 import GRequest from "./request";
 import { IRequest } from "./types";
 import { reduxStore } from "@/store/redux";
-import { logout } from "@/store/redux/slices/loginSlice";
+import { loginSlice } from "@/store/redux/slices/loginSlice";
 import { getLoginLocalStorage } from "@/store/redux/slices/loginSlice/util";
 // 配置 BASE_URL
 // import { BASE_URL, TIME_OUT } from "./request/config";
 
 const responseInterceptor = (res: AxiosResponse<IRequest<unknown>>) => {
   if (res.data.code === "200000") {
-    reduxStore.dispatch(logout());
+    reduxStore.dispatch(loginSlice.actions.logout());
     window.location.hash = "#/login";
   }
   return res;

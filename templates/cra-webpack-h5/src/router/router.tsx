@@ -1,20 +1,28 @@
-import { createHashRouter } from 'react-router-dom';
-import { getIndexData, getReportData } from './loaders.tsx';
+import { createBrowserRouter } from 'react-router-dom';
+import ErrorPage from './errorPage.tsx';
+import { AuthLoader } from './auth.tsx';
 import App from '@/pages/App/index.tsx';
-import Login from '@/pages/Login/index.tsx';
-const router = createHashRouter([
+import Counter from '@/pages/Counter.tsx';
+import Login from '@/pages/Login.tsx';
+import Nav from '@/pages/Nav.tsx';
+const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
   },
   {
     path: '/',
+    errorElement: <ErrorPage />,
+    element: <Nav />,
     children: [
       {
         path: '/',
-        id: 'indexData',
-        loader: getIndexData,
         element: <App />,
+      },
+      {
+        path: 'reduxDemo',
+        loader: AuthLoader,
+        element: <Counter />,
       },
     ],
   },

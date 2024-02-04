@@ -35,7 +35,6 @@ interface ILoginSendSmsParams {
   acceptNotes: "Y" | "N";
   userPhone: string;
 }
-interface ILoginSendSmsRes {}
 // 发验证码
 export const loginSendSms = ({
   code = "",
