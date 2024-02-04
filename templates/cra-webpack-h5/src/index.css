@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.linerBackground {
+  background: left 0% top 0 / 100% no-repeat url("@/assets/login/backage1.svg"),
+    #fff;
+}
+.linerBackgroundWithLogo {
+  background: left 0% top 0 / 100% no-repeat url("@/assets/login/backage.png"),
+    #fff;
+}
+
+.linerBackgroundWithPerson {
+  background: left 0% top -4% / 100% no-repeat url("@/assets/header@3x.png"),
+    #fff;
+}
+
+.header {
+  height: 44px;
+  line-height: 44px;
+}
+
+.oddEvenSpace div:nth-child(odd of .oddEvenItem) {
+}
+
+.oddEvenSpace div:nth-child(even of .oddEvenItem) {
+  margin-left: 0.75rem;
+}
+.textLeftSplit {
+  position: relative;
+}
+
+.textLeftSplit::before {
+  position: absolute;
+  content: "";
+  width: 1px;
+  background-color: rgba(0, 0, 0, 0.12);
+  left: 0;
+  top: 0.3125rem;
+  bottom: 0.3125rem;
+}
+
+.popFunctionDom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+
+.agreementColor {
+  color: #07c160;
+}
+.feReactPopHeaderRight {
+  min-width: 1.5rem;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="checkbox"]::after {
+  position: absolute;
+  top: -0.0625rem;
+  left: -0.0625rem;
+  right: -0.0625rem;
+  bottom: -0.0625rem;
+  content: " ";
+  background: #fff no-repeat center / 100% url("./assets/unChecked.svg");
+}
+
+input[type="checkbox"]:checked::after {
+  background: #fff no-repeat center / 100% url("./assets/checked.svg");
+}
+
+#loadingState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.5);
+}
+
