@@ -2,10 +2,10 @@
   "name": "cra-webpack",
   "version": "0.1.1",
   "private": true,
-  "homepage": "https://emosense.shzenon.cn/",
+  "homepage": "",
   "repository": {
     "type": "git",
-    "url": "https://codeup.aliyun.com/zenon/fe/h5Emotionse"
+    "url": ""
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
